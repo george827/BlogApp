@@ -41,7 +41,7 @@
 This is a blog app which uses ruby on rails for its backend, user can login, make blog posts and like and make comments on the blogPosts. It aslo uses posgres database to store the data.
 Here is the ERD for the project
 
-<img src ="./ERD">
+<img src ="./ERD.png">
 
 ## 🛠 Built With <a name="built-with"></a>
 
