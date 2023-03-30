@@ -68,9 +68,9 @@ Here is the ERD for the project
 ### Key Features <a name="key-features"></a>
 
 
-- **[User Login]**
-- **[Make a blog post]**
-- **[ LIke and leave a Comment]**
+- **User Login**
+- **Make a blog post**
+- **LIke and leave a Comment**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -149,9 +149,9 @@ To run tests, run the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **[User to add post]**
-- [ ] **[user to like and comment on post]**
-- [ ] **[delete post]**
+- [ ] **User to add post**
+- [ ] **user to like and comment on post**
+- [ ] **delete post**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -182,8 +182,6 @@ If you like this project you can give it a star ⭐️
 
 
 I would like to thank microverse for providing all the resources to buld this
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
