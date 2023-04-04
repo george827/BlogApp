@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe '/users', type: :request do
   describe 'UsersConroller' do
-    context 'GET index' do
+    context 'GET /index' do
       before(:example) do
         get '/users'
       end
