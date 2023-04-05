@@ -1,3 +1,10 @@
-<h1>Listing users</h1>
+
+<ul>
+<% @users.each do |user| %>
+  <a href="/users/<%= user.id %>" class = "user_link"">
+    <%= render "shared/users", user: user %>
+  </a>
+<% end %>
+</ul>
 
 

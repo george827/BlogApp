@@ -1,1 +1,24 @@
-<h1>show all details of post</h1>
+<div class = "user_full_post">
+  <div class = "Full_Post_Top">
+    <h2><%= @post.Title %> by <%= @user.name%></h2>
+    <p class="counters">
+      <%= "Comments: #{@post.comments_counter}, Likes: #{@post.likes_counter}"%>
+    </p>
+  </div>
+
+  <div class = "Full_Post_Text">
+    <p><%= @post.Text %></p>
+  </div>
+  
+</div>
+
+<div class = "Post_comments">
+  <% @comments.each do |comment| %>
+    <% @user = User.find(comment.author_id) %>
+    <p> <%= @user['name'] %> : <%= comment.Text %></p>
+  <% end %>
+  <% if @comments.length == 0 %>
+  <p>No comments yet</p>
+  <% end %>
+</div>
+
