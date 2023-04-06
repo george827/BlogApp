@@ -1,0 +1,7 @@
+<div class = "recent-post"> 
+<h3><%= post.Title %></h3>
+<p><%= "#{post.Text.slice(0, 100)}..." %></p>
+<p class="counters">
+  <%= "Comments: #{post.comments_counter}, Likes: #{post.likes_counter}"%>
+</p>
+</div>

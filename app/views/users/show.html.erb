@@ -1,1 +1,25 @@
-<h1>show user profile</h1>
+<ul>
+<%= render "shared/users", user: @user %>
+</ul>
+<div class = "user-bio">
+<h2>Bio</h2>
+<p><%= @user.bio %></p>
+</div>
+
+<% @posts.each do |post| %>
+  <%= render "shared/posts", post: post %>
+<% end %>
+<div class = "link_to_post">
+<%= link_to "See all Posts", "/users/#{@user.id}/posts/", class: "link_to_po" %> 
+</div>
+
+
+
+
+
+
+
+
+
+
+

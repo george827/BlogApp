@@ -1,1 +1,20 @@
-<h1>show user post</h1>
+
+<ul>
+<%= render "shared/users", user: @user %>
+</ul>
+<% @posts.each do |post| %>
+  <a href="/users/<%= @user.id %>/posts/<%= post.id %>" class = "user_post_comment user_link">
+    <%= render "shared/posts", post: post %>
+    <div class = "recent_comments">
+      <% post.recent_comments.each do |comment| %>
+        <% @user = User.find(comment.author_id) %>
+        <p> <%= @user['name'] %> : <%= comment.Text %></p>
+      <% end %>
+      <% if post.recent_comments.length == 0 %>
+      <p>No comments yet</p>
+      <% end %>
+    </div> 
+  </a>
+<% end %>
+
+  
