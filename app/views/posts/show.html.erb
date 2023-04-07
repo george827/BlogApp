@@ -9,6 +9,11 @@
   <div class = "Full_Post_Text">
     <p><%= @post.Text %></p>
   </div>
+
+  <%= form_with model: @like, url:  user_post_likes_path(@user, @post) do |form|%>
+    <%= form.submit 'Like 👍', class: 'submit' %>
+  <%end%>
+  
   
 </div>
 
@@ -20,5 +25,7 @@
   <% if @comments.length == 0 %>
   <p>No comments yet</p>
   <% end %>
+  <%= link_to "Add Comment", new_user_post_comment_path(@user, @post), class: "comments-btn" %> 
+
 </div>
 
