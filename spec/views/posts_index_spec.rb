@@ -1,5 +1,5 @@
 require 'rails_helper'
-​
+
 RSpec.describe '#UserIndex', type: :feature do
   before(:each) do
     @users = [
@@ -15,7 +15,7 @@ RSpec.describe '#UserIndex', type: :feature do
         bio: 'Teacher from Poland.', posts_counter: 1
       )
     ]
-​
+
     @posts = [
       @post1 = Post.create(
         author: @user1, Title: 'Hello Post', Text: 'This is my first post', comments_counter: 0, likes_counter: 0
@@ -27,51 +27,51 @@ RSpec.describe '#UserIndex', type: :feature do
         author: @user1, Title: 'Current Affairs', Text: 'This is my third post', comments_counter: 0, likes_counter: 0
       )
     ]
-​
+
     @comments = [
       Comment.create(post: @post1, author: @user1, Text: 'Hi Tom!'),
       Comment.create(post: @post2, author: @user2, Text: 'Great stuff.'),
       Comment.create(post: @post3, author: @user2, Text: 'Awesome!')
     ]
-​
+
     visit user_posts_path(@users.first, @posts.first)
   end
-​
+
   describe 'Post#Index' do
     it 'shoud display the users profile picture' do
       expect(page).to have_css("img[src='#{@users.first.photo}']")
     end
-​
+
     it 'shoudl display the user name' do
       expect(page).to have_content(@users.first.name)
     end
-​
+
     it 'should display the number of posts' do
       expect(page).to have_content(@users.first.posts_counter)
     end
-​
+
     it 'should display the post Title' do
       expect(page).to have_content(@posts.first.Title)
     end
-​
+
     it 'should display the body of the post' do
       expect(page).to have_content(@posts.first.Text)
     end
-​
+
     it 'should display the first comments of the post' do
       @posts.first.comments.each do |comment|
         expect(page).to have_content(comment.Text)
       end
     end
-​
+
     it 'should display the number of comments of the post' do
       expect(page).to have_content(@posts.first.comments_counter)
     end
-​
+
     it 'should display the number of likes of the post' do
       expect(page).to have_content(@posts.first.likes_counter)
     end
-​
+
     it 'should include a section for paginations' do
       expect(page).to have_content('Pagination')
     end

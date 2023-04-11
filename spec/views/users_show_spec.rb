@@ -1,69 +1,56 @@
 require 'rails_helper'
-require 'capybara/rails'
 
-RSpec.describe 'users/index', type: :request do
-  before(:each) do
-    @users = [
-      User.create(
-        name: 'Tom',
-        photo: 'https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2022/10/Andor_Luthen-Rael.png',
-        bio: 'Software Developer from Nigeria',
-        posts_counter: 2
-      ),
-      User.create(
-        name: 'Jerry',
-        photo: 'https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2022/06/obi-wan-kenobi-2-1-scaled.jpeg',
-        bio: 'Software Developer from South Africa', posts_counter: 3
-      )
-    ]
+RSpec.describe 'Users', type: :system do
+  describe 'User show page' do
+    before(:each) do
+      @user = User.create(name: 'John Doe',
+                          photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
+                          bio: 'I am a Full Stack Developer',
+                          posts_counter: 0)
 
-    @first_user = User.first
+      Post.create(author: @user, Title: 'My first post', Text: 'This is my first post')
+      Post.create(author: @user, Title: 'My second post', Text: 'This is my second post')
+      Post.create(author: @user, Title: 'My third post', Text: 'This is my third post')
+      @last_post = Post.create(author: @user, Title: 'My fourth post', Text: 'This is my fourth post')
 
-    @post1 = Post.create(author: @first_user, Title: 'Hello', Text: 'This is my second test post',
-                         comments_counter: 2, likes_counter: 6)
-    @post2 = Post.create(author: @first_user, Title: 'My second post',
-                         Text: 'Yeah, this is a new post for the first user', comments_counter: 0, likes_counter: 3)
-    @post3 = Post.create(author: @first_user, Title: 'My third post', Text: 'Added a new post', comments_counter: 4,
-                         likes_counter: 1)
+      visit user_path(@user.id)
+    end
 
-    visit user_path(@first_user)
-  end
+    it "can display the user's profile picture" do
+      expect(page.body).to include(@user.photo)
+    end
 
-  it "shows the user's profile picture" do
-    img = page.all('img')
-    expect(img.size).to eq(1)
-  end
+    it 'can display the user name' do
+      expect(page).to have_content(@user.name)
+    end
 
-  it 'shows the users name' do
-    expect(page).to have_content(@first_user.name)
-  end
+    it 'can display the user bio' do
+      expect(page).to have_content(@user.bio)
+    end
 
-  it 'shows the number of post the user has written' do
-    expect(page).to have_content(@first_user.posts_counter)
-  end
+    it 'can display the number of posts the user has written' do
+      expect(page).to have_content(@user.posts_counter)
+    end
 
-  it 'shows the users bio' do
-    expect(page).to have_content(@first_user.bio)
-  end
+    it "should show the user's first 3 posts" do
+      expect(page.body).to have_content('My fourth post')
+      expect(page.body).to have_content('My third post')
+      expect(page.body).to have_content('My second post')
+    end
 
-  it 'shows the users first three post' do
-    expect(page).to have_content(@post1.Text)
-    expect(page).to have_content(@post2.Text)
-    expect(page).to have_content(@post3.Text)
-  end
+    it "I can see a button that lets me view all of a user's posts" do
+      expect(page).to have_link('See all posts')
+    end
 
-  it 'shows a button to view all users posts' do
-    expect(page).to have_content('See all posts')
-  end
+    it "When I click a user's post, it redirects me to that post's show page" do
+      visit user_posts_path(@user)
+      click_link(@last_post.Title)
+      expect(current_path).to match user_posts_path(@user)
+    end
 
-  it 'redirects to the posts show page when I click on a user' do
-    visit user_posts_path(@first_user)
-    click_link @post3.Text
-    expect(current_path).to match user_posts_path(@first_user.id)
-  end
-
-  it 'redirects to the posts show page when I click on a user' do
-    click_link 'See all posts'
-    expect(current_path).to match user_posts_path(@first_user)
+    it "When I click to see all posts, it redirects me to the user's post's index page" do
+      click_link('See all posts')
+      expect(page).to have_current_path(user_posts_path(@user))
+    end
   end
 end

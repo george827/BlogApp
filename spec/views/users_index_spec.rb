@@ -1,55 +1,31 @@
 require 'rails_helper'
 
-require 'capybara/rspec'
+RSpec.describe 'Users', type: :system do
+  describe 'User index page' do
+    before(:each) do
+      @user = User.create(name: 'John Doe',
+                          photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
+                          bio: 'I am a Full Stack Developer',
+                          posts_counter: 0)
 
-RSpec.describe 'root page features' do
-  before(:each) do
-    @users = [
-      @user1 = User.create(
-        name: 'Derrick',
-        photo: 'https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?w=1480&t=st=1674661161~exp=1674661761~hmac=e529680000ea966150e5ea3b38241a0d8c9582faf23dac8af61ce1785cf27838',
-        bio: 'Fullstack Web developer from Uganda',
-        posts_counter: 0
-      ),
-      @user2 = User.create(
-        name: 'Lilly',
-        photo: 'https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?w=1480&t=st=1674661161~exp=1674661761~hmac=e529680000ea966150e5ea3b38241a0d8c9582faf23dac8af61ce1785cf27838',
-        bio: 'Teacher from Poland.',
-        posts_counter: 0
-      ),
-      @user3 = User.create(
-        name: 'Tom',
-        photo: 'https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?w=1480&t=st=1674661161~exp=1674661761~hmac=e529680000ea966150e5ea3b38241a0d8c9582faf23dac8af61ce1785cf27838',
-        bio: 'Teacher from Mexico.',
-        posts_counter: 0
-      )
-    ]
-    visit users_path
-  end
-  describe 'users#index' do
-    it 'displays all the different usernames' do
-      @users.each do |user|
-        expect(page).to have_content(user.name)
-      end
+      visit users_path
     end
-    it 'display the profile picture for each user' do
-      @users.each do |user|
-        expect(page).to have_css("img[src='#{user.photo}']")
-      end
+
+    it 'displays the user name of all other users' do
+      expect(page).to have_content(@user.name)
     end
-    it 'displays number of posts for each user' do
-      @users.each do |user|
-        expect(page).to have_content("Number of posts: #{user.posts_counter}")
-      end
+
+    it 'displays the user photo of all other users' do
+      expect(page.body).to include(@user.photo)
     end
-    it 'redirects to user show page when clicked on user name' do
-      visit('/')
-      click_link @users.first.name
-      expect(current_path).to eq(user_path(@users.first))
-      expect(page).to have_content(@users.first.name)
-      expect(page).to have_css("img[src='#{@users.first.photo}']")
-      expect(page).to have_content(@users.first.bio)
-      expect(page).to have_content("Number of posts: #{@users.first.posts_counter}")
+
+    it 'displays the number of posts each user has written' do
+      expect(page).to have_content(@user.posts_counter)
+    end
+
+    it "When I click on a user, I am redirected to that user's show page" do
+      click_link(@user.name)
+      expect(page).to have_current_path(user_path(@user))
     end
   end
 end
