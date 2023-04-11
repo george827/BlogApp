@@ -135,11 +135,23 @@ To run tests, run the following command:
 
 ## 👥 George Kinyanjui <a name="authors"></a>
 
-👤 **Author1**
+👤 **George Kinyanjui**
 
 - GitHub: [@george827](https://github.com/george827)
 - Twitter: [George Kinyanjui](https://twitter.com/geok8376)
 - LinkedIn: [George Kinyanjui](https://www.linkedin.com/in/georgekinyanjui/)
+
+👤 **Chimezie Asouzu**
+
+- GitHub: [@Shegy28](https://github.com/shegy28)
+- Twitter: [@Shegy28](https://twitter.com/twitterhandle)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/chimezie-asouzu-67704224a/)
+
+👤 **Faranosh Amini**
+
+- GitHub: [@githubhandle](https://github.com/FaranoshAmini)
+- Twitter: [@twitterhandle](https://twitter.com/Faranosh_Amini)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/faranosh-amini-9b925b23a/)
 
 
 

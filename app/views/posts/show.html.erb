@@ -18,9 +18,8 @@
 </div>
 
 <div class = "Post_comments">
-  <% @comments.each do |comment| %>
-    <% @user = User.find(comment.author_id) %>
-    <p> <%= @user['name'] %> : <%= comment.Text %></p>
+  <% @comments.includes(:author).each do |comment| %>
+    <p> <%= comment.author.name %> : <%= comment.Text %></p>
   <% end %>
   <% if @comments.length == 0 %>
   <p>No comments yet</p>
