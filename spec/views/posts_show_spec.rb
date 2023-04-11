@@ -61,7 +61,6 @@ RSpec.describe 'root page features' do
         expect(page).to have_content(comment.author.name)
       end
     end
-​
     it 'should display each comment left by the commenter' do
       @posts.first.comments.each do |comment|
         expect(page).to have_content(comment.body)
